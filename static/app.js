@@ -15,6 +15,7 @@ new Vue({
         fetch: function () {
             axios.get('/event')
                 .then(resp => {
+                    // console.log(resp)
                     resp.data.forEach(e => {
                         e.won = false
                         e.picked = false

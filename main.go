@@ -16,8 +16,8 @@ var (
 )
 
 func init() {
-	flag.StringVar(&port, "-p", "8000", "listen port")
-	flag.StringVar(&from, "-f", "meetup", "collect member from")
+	flag.StringVar(&port, "p", "8000", "listen port")
+	flag.StringVar(&from, "f", "meetup", "collect member from")
 }
 
 func main() {
@@ -54,11 +54,23 @@ func GetEventHandler(w http.ResponseWriter, r *http.Request) {
 		)
 	}
 
-	users, err := MeetupResvUsersOfLastEvent()
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		writeErrAsJSON(w, err)
-		return
+	var users []*User
+	var err error
+	switch from {
+	case "meetup":
+		users, err = MeetupResvUsersOfLastEvent()
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			writeErrAsJSON(w, err)
+			return
+		}
+	case "twitch":
+		users, err = TwitchFollowerTo("suapapa")
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			writeErrAsJSON(w, err)
+			return
+		}
 	}
 	err = json.NewEncoder(w).Encode(users)
 	if err != nil {
