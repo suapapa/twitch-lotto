@@ -16,9 +16,9 @@ new Vue({
             axios.get('/event')
                 .then(resp => {
                     resp.data.forEach(e => {
-                        e.member.won = false
-                        e.member.picked = false
-                        this.shared.attendees.push(e.member)
+                        e.won = false
+                        e.picked = false
+                        this.shared.attendees.push(e)
                     })
                     this.iscard = false
                 })
