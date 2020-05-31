@@ -54,13 +54,13 @@ func GetEventHandler(w http.ResponseWriter, r *http.Request) {
 		)
 	}
 
-	members, err := MeetupResvMembersOfLastEvent()
+	users, err := MeetupResvUsersOfLastEvent()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		writeErrAsJSON(w, err)
 		return
 	}
-	err = json.NewEncoder(w).Encode(members)
+	err = json.NewEncoder(w).Encode(users)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		writeErrAsJSON(w, err)

@@ -57,13 +57,26 @@ const (
 	endpoint = "http://api.meetup.com/GDG-Golang-Korea"
 )
 
-// MeetupResvMembersOfLastEvent returns list of confirmed members of last event
-func MeetupResvMembersOfLastEvent() ([]MeetupMember, error) {
+// MeetupResvUsersOfLastEvent returns list of confirmed members of last event
+func MeetupResvUsersOfLastEvent() ([]*User, error) {
 	evt, err := meetupGetLatestEvent()
 	if err != nil {
 		return nil, err
 	}
-	return meetupGetOKRsvpMembers(evt.ID)
+	member, err := meetupGetOKRsvpMembers(evt.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	users := make([]*User, len(member))
+	for i := 0; i < len(member); i++ {
+		users[i] = &User{
+			ID:              fmt.Sprintf("%d", member[i].Member.ID),
+			Name:            member[i].Member.Name,
+			ProfileImageURL: member[i].Member.Photo.PhotoLink,
+		}
+	}
+	return users, nil
 }
 
 // meetupGetLatestEvent get a latest event information
