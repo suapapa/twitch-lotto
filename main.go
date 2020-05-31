@@ -11,11 +11,13 @@ import (
 )
 
 var (
-	port = "8000"
+	port string
+	from string
 )
 
 func init() {
 	flag.StringVar(&port, "-p", "8000", "listen port")
+	flag.StringVar(&from, "-f", "meetup", "collect member from")
 }
 
 func main() {
@@ -52,13 +54,7 @@ func GetEventHandler(w http.ResponseWriter, r *http.Request) {
 		)
 	}
 
-	event, err := GetLatestEvent()
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		writeErrAsJSON(w, err)
-		return
-	}
-	members, err := GetOKRsvpMembers(event.ID)
+	members, err := MeetupResvMembersOfLastEvent()
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		writeErrAsJSON(w, err)
