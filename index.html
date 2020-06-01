@@ -37,9 +37,10 @@
                     <i class="fas fa-times"></i>
                 </button>
                 <!-- <a v-bind:href="'https://www.meetup.com/GDG-Golang-Korea/members/' + member.id + '/profile/'" target="_blank"> -->
+                <a v-bind:href="'https://twitch.tv/' + member.id">
                     <img class="mx-auto rounded w-20 h-20"
                       v-bind:src="member.profile_image_url ? member.profile_image_url : '/static/img/gopher.png'" />
-                <!-- </a> -->
+                </a>
                 <p class="text-center text-xs pt-3">{{ member.name | truncate(12) }}</p>
             </div>
         </li>

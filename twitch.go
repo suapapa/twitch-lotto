@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 	"net/url"
@@ -30,11 +29,11 @@ func TwitchFollowerTo(login string) ([]*User, error) {
 		Scopes:       []string{"user:read:email"},
 	}
 
-	token, err := oauth2Config.Token(context.TODO())
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("Access token: %s\n", token.AccessToken)
+	// token, err := oauth2Config.Token(context.TODO())
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// fmt.Printf("Access token: %s\n", token.AccessToken)
 
 	httpClient = oauth2Config.Client(context.TODO())
 

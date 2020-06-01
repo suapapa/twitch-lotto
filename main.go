@@ -17,7 +17,7 @@ var (
 
 func init() {
 	flag.StringVar(&port, "p", "8000", "listen port")
-	flag.StringVar(&from, "f", "meetup", "collect member from")
+	flag.StringVar(&from, "f", "twitch", "collect member from (meetup or twitch)")
 }
 
 func main() {
