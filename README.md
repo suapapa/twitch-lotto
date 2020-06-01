@@ -10,6 +10,7 @@ A simple lottery service for my twitch followers.
 git clone https://github.com/suapapa/twitch-lotto
 cd twitch-lotto
 go build
+source ./twitch_env.sh # FIX THIS TO YOUR CLIENT_ID AND CLIENT_SECRET
 ./twitch-lotto -f twitch
 ```
 
