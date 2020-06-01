@@ -1,13 +1,16 @@
-# Lotto
+# Twitch-lotto
 
-A simple lottery service for the meetup attendees.
+A simple lottery service for my twitch followers.
+
+> Based on [golangkorea/lotto](https://github.com/golangkorea/lotto), lottery for Meetup members
 
 ## Run
 
 ```shell
-git clone git@github.com:golangkorea/lotto
-cd lotto
-go run .
+git clone https://github.com/suapapa/twitch-lotto
+cd twitch-lotto
+go build
+./twitch-lotto -f twitch
 ```
 
 Then visit `http://127.0.0.1:8000`.
