@@ -38,6 +38,7 @@ func IndexView(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("content-type", "text/html; charset=utf-8")
 	f, err := os.Open("index.html")
 	chk(err)
+	defer f.Close()
 	io.Copy(w, f)
 }
 
